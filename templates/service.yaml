@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "storj-storagenode.fullname" . }}
+  labels:
+    {{- include "storj-storagenode.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.service }}
+  type: {{ .type }}
+  ports:
+    - port: {{ .port }}
+      targetPort: storj
+      protocol: TCP
+      name: storj
+      {{ if .nodePort }}nodePort: {{ .nodePort }}{{ end }}
+  {{- end }}
+  selector:
+    {{- include "storj-storagenode.selectorLabels" . | nindent 4 }}

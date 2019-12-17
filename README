@@ -1,0 +1,39 @@
+
+Secret identity:
+Override the value identityPath to the path where the identity is stored.
+
+For local volume in kubernetes, use a manually PV with the right path:
+
+```
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-pv-storagenode1
+spec:
+  capacity:
+    storage: 1Gi    # Don't care of it
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /root/data    # ->> CHANGEME
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+            - mysweetmachine
+```
+
+Then, install with the set volumeClaimTemplate.storageClassName=local-storage
