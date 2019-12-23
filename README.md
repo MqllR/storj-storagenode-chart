@@ -53,7 +53,7 @@ Parameter | Description | Default | Required
 --- | --- | --- | ---
 `configWallet` | ERC20 address for payment  | `nil` | yes
 `configEmail` | Email address used by Storj  | `nil` | yes
-`configAddress` | (domain|ip):port for external communication | `nil` | yes
+`configAddress` | (domain\|ip):port for external communication | `nil` | yes
 `configStorage` | Storage size allocated  | 1TB | no
 `configBandwidth` | Bandwidth allocated  | 2TiB | no
 `identityLocalPath` | Relative path to the chart. Must be in secrets/ | `secrets/*` | no
