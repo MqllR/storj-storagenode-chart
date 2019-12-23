@@ -20,6 +20,3 @@
 .idea/
 *.tmproj
 .vscode/
-
-# Custom
-identity/

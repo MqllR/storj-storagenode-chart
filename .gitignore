@@ -1,3 +1,4 @@
-identity/
 *.key
 *.cert
+
+secrets/
