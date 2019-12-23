@@ -82,4 +82,4 @@ configAddress: ""
 configBandwidth: "2TiB"
 configStorage: "1TB"
 
-identityPath: "identity/*"
+identityLocalPath: "identity/*"
