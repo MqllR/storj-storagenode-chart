@@ -53,8 +53,29 @@ Parameter | Description | Default | Required
 --- | --- | --- | ---
 `configWallet` | ERC20 address for payment  | `nil` | yes
 `configEmail` | Email address used by Storj  | `nil` | yes
-`configStorage` | Storage size allocated  | `nil` | yes
-`configBandwidth` | Bandwidth allocated  | `nil` | yes
-`configBandwidth` | Bandwidth allocated  | `nil` | yes
-`identityLocalPath` | Relative path to the chart. Must be in secrets/ | `nil` | yes
+`configAddress` | (domain|ip):port for external communication | `nil` | yes
+`configStorage` | Storage size allocated  | 1TB | no
+`configBandwidth` | Bandwidth allocated  | 2TiB | no
+`identityLocalPath` | Relative path to the chart. Must be in secrets/ | `secrets/*` | no
 `volumeClaimTemplate.storageClassName` | storageClass used for this node | `nil` | no
+
+### Installing the Chart
+
+Clone the repo
+
+```
+git clone https://github.com/MqllR/storj-storagenode-chart
+```
+
+Create your identity
+
+```
+mkdir -p secrets/identity-storagenode/
+cp ~/.local/share/storj/identity/storagenode/ secrets/identity-storagenode/
+```
+
+Install the chart
+
+```
+helm install node . --set configEmail=mymail@domain.com,configWallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,configAddress=mydomain.net:28967,identityLocalPath=secrets/identity-storagenode/\*
+```
