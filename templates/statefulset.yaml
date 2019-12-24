@@ -32,7 +32,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: storj
-              containerPort: 9151
+              containerPort: 28967
               protocol: TCP
           livenessProbe:
             tcpSocket:
