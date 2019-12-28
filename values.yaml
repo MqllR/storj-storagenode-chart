@@ -4,11 +4,6 @@
 
 replicaCount: 1
 
-image:
-  repository: storjlabs/storagenode:alpha
-  pullPolicy: IfNotPresent
-
-imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -22,15 +17,52 @@ serviceAccount:
 podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+podAnnotation: {}
+
+imagePullSecrets: {}
+
+podAnnotations: {}
+  # prometheus.io/scrape: "true"
+  # prometheus.io/port: "9651"
+
+storagenode:
+  image:
+    repository: storjlabs/storagenode:alpha
+    pullPolicy: IfNotPresent
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+metrics:
+  enabled: true
+  image:
+    repository: anclrii/storj-exporter:latest
+    pullPolicy: IfNotPresent
+
+  securityContext: {}
+  resources: {}
 
 service:
+  annotations: {}
+    # prometheus.io/scrape: "true"
+    # prometheus.io/port: "9651"
   type: NodePort
   port: 28967
 
@@ -46,18 +78,6 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
 
 nodeSelector: {}
 
@@ -76,10 +96,11 @@ volumeClaimTemplate:
     requests:
       storage: 2Ti
 
-configWallet: ""
-configEmail: ""
-configAddress: ""
-configBandwidth: "2TiB"
-configStorage: "1TB"
+config:
+  # wallet: "0xdfca4035b9f16c40b558218d1bedc08590fe28d4"
+  # email: "me@storage.net"
+  # address: "storagenodeaddress.net:28967"
+  bandwidth: "2TiB"
+  storage: "1TB"
 
 identityLocalPath: "secrets/*"

@@ -51,13 +51,14 @@ spec:
 
 Parameter | Description | Default | Required
 --- | --- | --- | ---
-`configWallet` | ERC20 address for payment  | `nil` | yes
-`configEmail` | Email address used by Storj  | `nil` | yes
-`configAddress` | (domain\|ip):port for external communication | `nil` | yes
-`configStorage` | Storage size allocated  | 1TB | no
-`configBandwidth` | Bandwidth allocated  | 2TiB | no
+`config.wallet` | ERC20 address for payment  | `nil` | yes
+`config.email` | Email address used by Storj  | `nil` | yes
+`config.address` | (domain\|ip):port for external communication | `nil` | yes
+`config.storage` | Storage size allocated  | 1TB | no
+`configbandwidth` | Bandwidth allocated  | 2TiB | no
 `identityLocalPath` | Relative path to the chart. Must be in secrets/ | `secrets/*` | no
 `volumeClaimTemplate.storageClassName` | storageClass used for this node | `nil` | no
+`metrics.enabled` | Start the container storj exporter | `true` | no
 
 ### Installing the Chart
 
@@ -77,5 +78,5 @@ cp ~/.local/share/storj/identity/storagenode/ secrets/identity-storagenode/
 Install the chart
 
 ```
-helm install node . --set configEmail=mymail@domain.com,configWallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,configAddress=mydomain.net:28967,identityLocalPath=secrets/identity-storagenode/\*
+helm install node . --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,identityLocalPath=secrets/identity-storagenode/\*
 ```

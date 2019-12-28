@@ -5,8 +5,10 @@ metadata:
   labels:
     {{- include "storj-storagenode.labels" . | nindent 4 }}
 data:
-  WALLET: {{ required "Don't forget your ERC20 wallet" .Values.configWallet }}
-  EMAIL: {{ required "Must provide an email address" .Values.configEmail }}
-  ADDRESS: {{ required "The address to connect your node" .Values.configAddress }}
-  BANDWIDTH: {{ .Values.configBandwidth }}
-  STORAGE: {{ .Values.configStorage }}
+  {{- with .Values.config }}
+  WALLET: {{ required "Don't forget your ERC20 wallet" .wallet }}
+  EMAIL: {{ required "Must provide an email address" .email }}
+  ADDRESS: {{ required "The address to connect your node" .address }}
+  BANDWIDTH: {{ .bandwidth }}
+  STORAGE: {{ .storage }}
+  {{- end }}
