@@ -36,15 +36,20 @@ spec:
           imagePullPolicy: {{ .image.pullPolicy }}
           {{- end }}
           ports:
-            - name: storj
+            - name: storagenode
               containerPort: 28967
               protocol: TCP
+            {{- if .Values.nodeStats.enabled }}
+            - name: stats
+              containerPort:  14002
+              protocol: TCP
+            {{- end }}
           livenessProbe:
             tcpSocket:
-              port: storj
+              port: storagenode
           readinessProbe:
             tcpSocket:
-              port: storj
+              port: storagenode
           envFrom:
             - configMapRef:
                 name: {{ include "storj-storagenode.fullname" . }}

@@ -8,11 +8,20 @@ spec:
   {{- with .Values.service }}
   type: {{ .type }}
   ports:
-    - port: {{ .port }}
-      targetPort: storj
+    - port: {{ .storagenode.port }}
+      targetPort: storagenode
       protocol: TCP
-      name: storj
-      {{ if .nodePort }}nodePort: {{ .nodePort }}{{ end }}
+      name: storagenode
+      {{ if .storagenode.nodePort }}nodePort: {{ .storagenode.nodePort }}{{ end }}
   {{- end }}
+    {{- if .Values.nodeStats.enabled }}
+    {{- with .Values.service.stats }}
+    - port: {{ .port }}
+      targetPort: stats
+      protocol: TCP
+      name: stats
+      {{ if .nodePort }}nodePort: {{ .nodePort }}{{ end }}
+    {{- end }}
+    {{- end }}
   selector:
     {{- include "storj-storagenode.selectorLabels" . | nindent 4 }}

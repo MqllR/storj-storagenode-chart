@@ -64,7 +64,12 @@ service:
     # prometheus.io/scrape: "true"
     # prometheus.io/port: "9651"
   type: NodePort
-  port: 28967
+  storagenode:
+    port: 28967
+    # nodePort: 30002
+  stats:
+    port: 14002
+    # nodePort: 30012
 
 ingress:
   enabled: false
@@ -95,6 +100,9 @@ volumeClaimTemplate:
   resources:
     requests:
       storage: 2Ti
+
+nodeStats:
+  enabled: true
 
 config:
   # wallet: "0xdfca4035b9f16c40b558218d1bedc08590fe28d4"
