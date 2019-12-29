@@ -2,8 +2,6 @@
 
 This helm chart install a storj storagenode https://documentation.storj.io/setup/cli/storage-node
 
-NOTE: Will soon implement its prometheus exporter.
-
 ### Prerequisites
 
 #### Identity
