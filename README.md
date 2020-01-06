@@ -53,8 +53,8 @@ Parameter | Description | Default | Required
 `config.email` | Email address used by Storj  | `nil` | yes
 `config.address` | (domain\|ip):port for external communication | `nil` | yes
 `config.storage` | Storage size allocated  | 1TB | no
-`configbandwidth` | Bandwidth allocated  | 2TiB | no
-`nodeStats.enabled` | Expose the node Dashboard | true | no
+`config.bandwidth` | Bandwidth allocated  | 2TiB | no
+`nodeStats.enabled` | Expose the node's Dashboard | true | no
 `identityLocalPath` | Relative path to the chart. Must be in secrets/ | `secrets/*` | no
 `volumeClaimTemplate.storageClassName` | storageClass used for this node | `nil` | no
 `metrics.enabled` | Start the container storj exporter | `true` | no
