@@ -28,7 +28,7 @@ podAnnotations: {}
 storagenode:
   image:
     repository: storjlabs/storagenode:alpha
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
 
   securityContext: {}
     # capabilities:
