@@ -60,7 +60,9 @@ Parameter | Description | Default | Required
 `nodeStats.enabled` | Expose the node's Dashboard | true | no
 `nodeStats.service.type` | Service type for the dashboard | ClusterIP | no
 `nodeStats.service.port` | Service port for the dashboard | 14002 | no
-`identityLocalPath` | Relative path to the chart. Must be in secrets/ | `secrets/*` | no
+`identity.localPath` | Relative path to the chart. Must be in secrets/ directory | `secrets/*` | no
+`identity.externalSecret.enabled` | Use an external secret | false | no
+`identity.externalSecret.secretName` | Specify the secretName | "" | no
 `volumeClaimTemplate.storageClassName` | storageClass used for this node | `nil` | no
 `metrics.enabled` | Start the container storj exporter | `true` | no
 
@@ -82,5 +84,5 @@ cp ~/.local/share/storj/identity/storagenode/ secrets/identity-storagenode/
 Install the chart
 
 ```
-helm install node . --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,identityLocalPath=secrets/identity-storagenode/\*
+helm install node . --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,localPath=secrets/identity-storagenode/\*
 ```

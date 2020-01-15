@@ -112,4 +112,8 @@ config:
   bandwidth: "2TiB"
   storage: "1TB"
 
-identityLocalPath: "secrets/*"
+identity:
+  externalSecret:
+    enabled: false
+    secretName: ""
+  localPath: "secrets/*"

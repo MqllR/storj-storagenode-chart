@@ -56,10 +56,8 @@ spec:
           resources:
             {{- toYaml .Values.storagenode.resources | nindent 12 }}
           volumeMounts:
-            {{- if .Values.persistence }}
             - name: {{ include "storj-storagenode.fullname" . }}
               mountPath: /app/config
-            {{- end }}
             - name: storj-identity
               mountPath: /app/identity
         {{- if .Values.metrics.enabled }}
@@ -91,7 +89,15 @@ spec:
       volumes:
         - name: storj-identity
           secret:
+            {{- if .Values.identity.externalSecret.enabled }}
+            secretName: {{ .Values.identity.externalSecret.secretName }}
+            {{- else }}
             secretName: {{ include "storj-storagenode.fullname" . }}
+            {{- end }}
+        {{- if not .Values.persistence.enabled }}
+        - name: {{ include "storj-storagenode.fullname" . }}
+          emptyDir: {}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
