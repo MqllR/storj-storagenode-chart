@@ -8,20 +8,32 @@ spec:
   {{- with .Values.service }}
   type: {{ .type }}
   ports:
-    - port: {{ .storagenode.port }}
+    - port: {{ .port }}
       targetPort: storagenode
       protocol: TCP
       name: storagenode
-      {{ if .storagenode.nodePort }}nodePort: {{ .storagenode.nodePort }}{{ end }}
+      {{ if .nodePort }}nodePort: {{ .nodePort }}{{ end }}
   {{- end }}
-    {{- if .Values.nodeStats.enabled }}
-    {{- with .Values.service.stats }}
+  selector:
+    {{- include "storj-storagenode.selectorLabels" . | nindent 4 }}
+---
+{{- if .Values.nodeStats.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "storj-storagenode.fullname" . }}-stats
+  labels:
+    {{- include "storj-storagenode.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.nodeStats.service }}
+  type: {{ .type }}
+  ports:
     - port: {{ .port }}
       targetPort: stats
       protocol: TCP
       name: stats
       {{ if .nodePort }}nodePort: {{ .nodePort }}{{ end }}
-    {{- end }}
-    {{- end }}
+  {{- end }}
   selector:
     {{- include "storj-storagenode.selectorLabels" . | nindent 4 }}
+{{- end }}

@@ -64,13 +64,10 @@ service:
     # prometheus.io/scrape: "true"
     # prometheus.io/port: "9651"
   type: NodePort
-  storagenode:
-    port: 28967
-    # nodePort: 30002
-  stats:
-    port: 14002
-    # nodePort: 30012
+  port: 28967
+  nodePort: ""
 
+# Ingress is used to expose the dashboard
 ingress:
   enabled: false
   annotations: {}
@@ -78,7 +75,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: chart-example.local
-      paths: []
+      paths: ["/"]
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -103,6 +100,10 @@ volumeClaimTemplate:
 
 nodeStats:
   enabled: true
+  service:
+    type: ClusterIP
+    port: 14002
+    nodePort: ""
 
 config:
   # wallet: "0xdfca4035b9f16c40b558218d1bedc08590fe28d4"

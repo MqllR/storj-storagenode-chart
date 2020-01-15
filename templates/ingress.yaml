@@ -1,6 +1,5 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "toto.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
+{{- $fullName := include "storj-storagenode.fullname" . -}}
 {{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1beta1
 {{- else -}}
@@ -10,7 +9,7 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "toto.labels" . | nindent 4 }}
+    {{- include "storj-storagenode.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -35,7 +34,7 @@ spec:
           - path: {{ . }}
             backend:
               serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              servicePort: stats
         {{- end }}
   {{- end }}
 {{- end }}

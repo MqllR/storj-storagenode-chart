@@ -10,6 +10,24 @@ spec:
   containers:
     - name: wget
       image: busybox
-      command: ['wget']
-      args:  ['{{ include "storj-storagenode.fullname" . }}:{{ .Values.service.port }}']
+      command: ['nc']
+      args:  ['-zv', '{{ include "storj-storagenode.fullname" . }}', '{{ .Values.service.port }}']
   restartPolicy: Never
+---
+{{- if .Values.nodeStats.enabled }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "storj-storagenode.fullname" . }}-stats-test-connection"
+  labels:
+{{ include "storj-storagenode.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args:  ['{{ include "storj-storagenode.fullname" . }}-stats:{{ .Values.nodeStats.service.port }}']
+  restartPolicy: Never
+{{- end }}
