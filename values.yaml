@@ -27,7 +27,7 @@ podAnnotations: {}
 
 storagenode:
   image:
-    repository: storjlabs/storagenode:alpha
+    repository: storjlabs/storagenode:beta
     pullPolicy: Always
 
   securityContext: {}
@@ -53,7 +53,7 @@ storagenode:
 metrics:
   enabled: true
   image:
-    repository: anclrii/storj-exporter:latest
+    repository: anclrii/storj-exporter:0.2.4
     pullPolicy: IfNotPresent
 
   securityContext: {}
