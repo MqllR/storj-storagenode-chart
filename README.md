@@ -54,7 +54,12 @@ Parameter | Description | Default | Required
 `config.address` | (domain\|ip):port for external communication | `nil` | yes
 `config.storage` | Storage size allocated  | 1TB | no
 `config.bandwidth` | Bandwidth allocated  | 2TiB | no
+`service.type` | Service type for the storagenode | NodePort | no
+`service.port` | Service port for the storagenode | 28967 | no
+`service.nodePort` | Node port to expose for the storagenode | "" | no
 `nodeStats.enabled` | Expose the node's Dashboard | true | no
+`nodeStats.service.type` | Service type for the dashboard | ClusterIP | no
+`nodeStats.service.port` | Service port for the dashboard | 14002 | no
 `identityLocalPath` | Relative path to the chart. Must be in secrets/ | `secrets/*` | no
 `volumeClaimTemplate.storageClassName` | storageClass used for this node | `nil` | no
 `metrics.enabled` | Start the container storj exporter | `true` | no
