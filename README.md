@@ -6,7 +6,7 @@ Helm chart install a [storj](https://storj.io/) storagenode.
 
 #### Identity
 
-The storage node needs an identity previously generated https://documentation.storj.io/dependencies/identity. After that, copy the identity from `$HOME/.local/share/storj/identity/storagenode/` to `<chart_path>/secrets/<release_name>/` or create a kubernetes secret by yourself that will be mounted on the pod.
+The storage node needs an identity previously generated https://documentation.storj.io/dependencies/identity.
 
 #### Storage
 
@@ -98,7 +98,7 @@ git clone https://github.com/MqllR/storj-storagenode-chart
 
 2. Create your identity
 
-As explain in this [documentation](https://helm.sh/docs/chart_template_guide/accessing_files/), helm can't access files not in the chart directory. You can create the identity by your own or copy the storj identity path to the local chart directory:
+As explain in this [documentation](https://helm.sh/docs/chart_template_guide/accessing_files/), helm can't access files not in the chart directory. You can create the identity by yourself or copy the storj identity path to the local chart directory:
 
 ```
 mkdir -p secrets/identity-storagenode/
