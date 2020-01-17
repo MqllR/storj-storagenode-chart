@@ -90,13 +90,12 @@ affinity: {}
 persistence:
   enabled: true
   annotations: {}
-
-volumeClaimTemplate:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Ti
+  volumeClaimTemplate:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 2Ti
 
 nodeStats:
   enabled: true

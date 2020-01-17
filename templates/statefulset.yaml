@@ -114,10 +114,10 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: {{ include "storj-storagenode.fullname" . }}
-    {{- with .Values.persistence.annotations  }}
+    {{- with .Values.persistence  }}
       annotations:
-{{ toYaml . | indent 8 }}
+{{ toYaml .annotations | indent 8 }}
     {{- end }}
     spec:
-{{ toYaml .Values.volumeClaimTemplate | indent 6 }}
+{{ toYaml .volumeClaimTemplate | indent 6 }}
   {{- end }}

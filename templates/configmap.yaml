@@ -7,8 +7,8 @@ metadata:
 data:
   {{- with .Values.config }}
   WALLET: {{ required "Don't forget your ERC20 wallet" .wallet }}
-  EMAIL: {{ required "Must provide an email address" .email }}
-  ADDRESS: {{ required "The address to connect your node" .address }}
+  EMAIL: {{ required "Provide an email address" .email }}
+  ADDRESS: {{ required "The address to connect to your node" .address }}
   BANDWIDTH: {{ .bandwidth }}
   STORAGE: {{ .storage }}
   {{- end }}
