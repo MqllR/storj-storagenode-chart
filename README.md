@@ -98,7 +98,7 @@ git clone https://github.com/MqllR/storj-storagenode-chart
 
 2. Create your identity
 
-As explain in this [documentation](https://helm.sh/docs/chart_template_guide/accessing_files/), helm can't access files not in the chart directory. You can create the identity by yourself or copy the storj identity path to the local chart directory:
+As explain in this [documentation](https://helm.sh/docs/chart_template_guide/accessing_files/), helm can't access files outside of the chart directory. You can create the identity by yourself or copy the storj identity path to the local chart directory:
 
 ```
 mkdir -p secrets/identity-storagenode/
