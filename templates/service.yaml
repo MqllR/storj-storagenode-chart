@@ -4,6 +4,10 @@ metadata:
   name: {{ include "storj-storagenode.fullname" . }}
   labels:
     {{- include "storj-storagenode.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.service.annotations }}
+    {{- toYaml . | nindent 8 }}
+    {{- end }}
 spec:
   {{- with .Values.service }}
   type: {{ .type }}
