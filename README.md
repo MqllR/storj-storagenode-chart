@@ -1,6 +1,6 @@
 ## STORJ Storagenode
 
-Helm chart install a [storj](https://storj.io/) storagenode.
+Helm chart to install a [storj](https://storj.io/) storagenode.
 
 ### Prerequisites
 
