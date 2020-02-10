@@ -113,6 +113,4 @@ config:
 
 identity:
   externalSecret:
-    enabled: false
-    secretName: ""
-  localPath: "secrets/*"
+    # secretName: "storagenode-identity"

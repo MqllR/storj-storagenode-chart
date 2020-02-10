@@ -72,9 +72,7 @@ Parameter | Description | Default | Required
 `nodeStats.enabled` | Expose the node's Dashboard | `true` | no
 `nodeStats.service.type` | Service type for the dashboard | `ClusterIP` | no
 `nodeStats.service.port` | Service port for the dashboard | `14002` | no
-`identity.localPath` | Relative path to the chart. Must be in the chart directory | `secrets/*` | no
-`identity.externalSecret.enabled` | Use an external secret | `false` | no
-`identity.externalSecret.secretName` | Specify the secretName | `""` | no
+`identity.externalSecret.secretName` | Specify the secretName | `""` | yes
 `persistence.enabled` | Create a persistence volume | `true` | no
 `persistence.annotations` | Persistent volume claim annotation | `{}` | no
 `persistence.volumeClaimTemplate` | Persistent volume claim YAML | `{}` | no

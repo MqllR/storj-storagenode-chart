@@ -89,11 +89,7 @@ spec:
       volumes:
         - name: storj-identity
           secret:
-            {{- if .Values.identity.externalSecret.enabled }}
-            secretName: {{ .Values.identity.externalSecret.secretName }}
-            {{- else }}
-            secretName: {{ include "storj-storagenode.fullname" . }}
-            {{- end }}
+            secretName: {{ required "External secret identity" .Values.identity.externalSecret.secretName }}
         {{- if not .Values.persistence.enabled }}
         - name: {{ include "storj-storagenode.fullname" . }}
           emptyDir: {}
