@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/base64"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -44,6 +43,7 @@ func main() {
 	flag.Parse()
 
 	if secretName == "" {
+		fmt.Println("Missing secret name. Use the arg -secret-name")
 		flag.Usage()
 		os.Exit(1)
 	}
@@ -52,20 +52,17 @@ func main() {
 		panic(err)
 	}
 
-	certFiles, err := filepath.Glob(identityDir + "/*.cert")
-	if err != nil {
-		panic(err)
-	}
-
-	keyFiles, err := filepath.Glob(identityDir + "/*.key")
+	identityFiles, err := filepath.Glob(identityDir + "/*")
 	if err != nil {
 		panic(err)
 	}
 
 	var matches []string
-
-	matches = append(matches, certFiles...)
-	matches = append(matches, keyFiles...)
+	for _, file := range identityFiles {
+		if filepath.Ext(file) == ".cert" || filepath.Ext(file) == ".key" {
+			matches = append(matches, file)
+		}
+	}
 
 	if len(matches) == 0 {
 		panic("No identity files found")
@@ -74,19 +71,13 @@ func main() {
 	data := make(map[string][]byte, len(matches))
 
 	for _, file := range matches {
-		if filepath.Ext(file) != ".cert" && filepath.Ext(file) != ".key" {
-			continue
-		}
-
 		content, err := ioutil.ReadFile(file)
 		if err != nil {
 			panic(err)
 		}
 
 		filename := filepath.Base(file)
-		payload := []byte(base64.StdEncoding.EncodeToString(content))
-
-		data[filename] = payload
+		data[filename] = content
 	}
 
 	fmt.Println(string(kubernetesSecret(secretName, data)))
