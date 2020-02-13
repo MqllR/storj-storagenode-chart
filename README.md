@@ -88,23 +88,18 @@ Parameter | Description | Default | Required
 
 ### Installing the Chart
 
-1. Clone the repo
+1. Get the repo
 
 ```
-git clone https://github.com/MqllR/storj-storagenode-chart
+helm repo add mqli http://helm.mqli.fr
 ```
 
 2. Create your identity
 
-As explain in this [documentation](https://helm.sh/docs/chart_template_guide/accessing_files/), helm can't access files outside of the chart directory. You can create the identity by yourself or copy the storj identity path to the local chart directory:
+Create a secret with your identity in kubernetes
+
+3. Install the chart
 
 ```
-mkdir -p secrets/identity-storagenode/
-cp ~/.local/share/storj/identity/storagenode/ secrets/identity-storagenode/
-```
-
-Install the chart
-
-```
-helm install node1 . --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,identity.localPath=secrets/identity-storagenode/\*
+helm install node mqli/storj-storagenode --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,identity.externalSecret.secretName="myidentity"
 ```
