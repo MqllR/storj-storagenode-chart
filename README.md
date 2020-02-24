@@ -88,7 +88,7 @@ Parameter | Description | Default | Required
 
 ### Installing the Chart
 
-1. Get the repo
+1. Add the helm repo
 
 ```
 helm repo add mqli http://helm.mqli.fr
@@ -98,8 +98,13 @@ helm repo add mqli http://helm.mqli.fr
 
 Create a secret with your identity in kubernetes
 
+```
+curl -LO $(curl -s https://api.github.com/repos/mqllr/storj-storagenode-chart/releases/latest | jq -r '.assets[] | if (.name | contains("amd64")) then .browser_download_url else empty end')
+./identity-to-kube-secret-amd64 -secret-name "storj-identity-node1" | kubectl apply -f -
+```
+
 3. Install the chart
 
 ```
-helm install node mqli/storj-storagenode --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,identity.externalSecret.secretName="myidentity"
+helm install node mqli/storj-storagenode --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,identity.externalSecret.secretName="storj-identity-node1"
 ```
