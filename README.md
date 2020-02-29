@@ -91,7 +91,7 @@ Parameter | Description | Default | Required
 1. Add the helm repo
 
 ```
-helm repo add mqli http://helm.mqli.fr
+helm repo add mqli https://helm.mqli.fr
 ```
 
 2. Create your identity
