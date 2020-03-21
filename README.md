@@ -55,7 +55,8 @@ Parameter | Description | Default | Required
 `config.storage` | Storage size allocated  | `1TB` | no
 `config.bandwidth` | Bandwidth allocated  | `2TiB` | no
 `service.type` | Service type for the storagenode | `NodePort` | no
-`service.annotations` |  | `{}` | no
+`service.annotations` | Service annotations | `{}` | no
+`service.loadBalancerIP` | Secify a Load balancer IP if the provider allow you | null | no
 `service.port` | Service port for the storagenode | `28967` | no
 `service.nodePort` | Node port to expose for the storagenode | "" | no
 `replicaCount` | Number of replica | `1` | no
