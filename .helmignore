@@ -25,3 +25,5 @@
 script/
 Makefile
 identity-to-kube-secret-*
+go.*
+README.md
