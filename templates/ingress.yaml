@@ -33,7 +33,7 @@ spec:
         {{- range .paths }}
           - path: {{ . }}
             backend:
-              serviceName: {{ $fullName }}
+              serviceName: {{ $fullName }}-stats
               servicePort: stats
         {{- end }}
   {{- end }}
