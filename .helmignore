@@ -24,3 +24,4 @@
 # Custom path
 script/
 Makefile
+identity-to-kube-secret-*
