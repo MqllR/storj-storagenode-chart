@@ -5,3 +5,4 @@ secrets/
 
 # Build
 identity-to-kube-secret-*
+storj-storagenode-*

@@ -64,6 +64,7 @@ service:
     # prometheus.io/scrape: "true"
     # prometheus.io/port: "9651"
   type: NodePort
+  loadBalancerIP:
   port: 28967
   nodePort: ""
 
@@ -112,5 +113,5 @@ config:
   storage: "1TB"
 
 identity:
-  externalSecret:
+  externalSecret: {}
     # secretName: "storagenode-identity"
