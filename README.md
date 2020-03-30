@@ -53,7 +53,6 @@ Parameter | Description | Default | Required
 `config.email` | Email address used by Storj  | `nil` | yes
 `config.address` | (domain\|ip):port for external communication | `nil` | yes
 `config.storage` | Storage size allocated  | `1TB` | no
-`config.bandwidth` | Bandwidth allocated  | `2TiB` | no
 `service.type` | Service type for the storagenode | `NodePort` | no
 `service.annotations` | Service annotations | `{}` | no
 `service.loadBalancerIP` | Secify a Load balancer IP if the provider allow you | null | no
