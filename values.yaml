@@ -27,7 +27,7 @@ podAnnotations: {}
 
 storagenode:
   image:
-    repository: storjlabs/storagenode:beta
+    repository: storjlabs/storagenode:latest
     pullPolicy: Always
 
   securityContext: {}

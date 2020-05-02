@@ -65,7 +65,7 @@ Parameter | Description | Default | Required
 `tolerations` | Node taints to tolerate | `{}` | no
 `affinity` | Pod affinity | `{}` | no
 `imagePullSecrets` |  | `{}` | no
-`storagenode.image.repository` | Image name | `storjlabs/storagenode:beta` | no
+`storagenode.image.repository` | Image name | `storjlabs/storagenode:latest` | no
 `storagenode.image.pullPolicy` | Container pull policy | `Always` | no
 `storagenode.securtyContext` | Custom security context for container | `{}` | no
 `storagenode.resources` | Resources request and limit YAML | `{}` | no
