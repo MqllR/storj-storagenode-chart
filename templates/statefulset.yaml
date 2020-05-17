@@ -75,10 +75,12 @@ spec:
             - name: STORJ_HOST_ADDRESS
               value: "127.0.0.1"
           livenessProbe:
+            timeoutSeconds: 2
             httpGet:
               path: /metrics
               port: storj-exporter
           readinessProbe:
+            timeoutSeconds: 2
             httpGet:
               path: /metrics
               port: storj-exporter
