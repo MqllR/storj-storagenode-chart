@@ -1,8 +1,0 @@
-# Identity
-*.key
-*.cert
-secrets/
-
-# Build
-identity-to-kube-secret-*
-storj-storagenode-*

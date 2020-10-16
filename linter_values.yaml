@@ -1,9 +1,0 @@
----
-config:
-  wallet: "test"
-  email: "test"
-  address: "test"
-
-identity:
-  externalSecret:
-    secretName: "test"
