@@ -1,5 +1,7 @@
 ## STORJ Storagenode
 
+![Release Helm Charts](https://github.com/MqllR/storj-storagenode-chart/workflows/Release%20Helm%20Charts/badge.svg)
+
 Helm chart to install a [storj](https://storj.io/) storagenode.
 
 ### Prerequisites
