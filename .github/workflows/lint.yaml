@@ -16,4 +16,3 @@ jobs:
         uses: helm/chart-testing-action@v1.1.0
         with:
           command: lint
-          config: linter_values.yaml
