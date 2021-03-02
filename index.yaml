@@ -3,6 +3,19 @@ entries:
   storj-storagenode:
   - apiVersion: v2
     appVersion: 1.14.7
+    created: "2021-03-02T16:38:08.877098799Z"
+    description: A Helm chart for the storagenode STORJ
+    digest: 18607c8d16d01eb093e72396ad3b56b52d086370bce528df24492ba5873e46be
+    maintainers:
+    - email: mael@mqli.fr
+      name: MqllR
+    name: storj-storagenode
+    type: application
+    urls:
+    - https://github.com/MqllR/storj-storagenode-chart/releases/download/storj-storagenode-0.2.8/storj-storagenode-0.2.8.tgz
+    version: 0.2.8
+  - apiVersion: v2
+    appVersion: 1.14.7
     created: "2020-10-16T13:27:26.658414733Z"
     description: A Helm chart for the storagenode STORJ
     digest: 6ffcee330556a570fb3dcfae2cdcab9f972ca033f3c6de6f5015584e1b7dc349
