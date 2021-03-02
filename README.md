@@ -79,7 +79,7 @@ Parameter | Description | Default | Required
 `persistence.annotations` | Persistent volume claim annotation | `{}` | no
 `persistence.volumeClaimTemplate` | Persistent volume claim YAML | `{}` | no
 `metrics.enabled` | Start the container storj-exporter | `true` | no
-`metrics.image.repository` | Image name | `anclrii/storj-exporter:0.2.4` | no
+`metrics.image.repository` | Image name | `anclrii/storj-exporter:1.0.10` | no
 `metrics.image.pullPolicy` | Container pull policy | `IfNotPresent` | no
 `metrics.securtyContext` | Custom security context for container | `{}` | no
 `metrics.resources` | Resources request and limit YAML | `{}` | no
@@ -101,12 +101,12 @@ helm repo add storj-storagenode-chart https://mqllr.github.io/storj-storagenode-
 Create a secret with your identity in kubernetes
 
 ```
-curl -LO $(curl -s https://api.github.com/repos/mqllr/storj-storagenode-chart/releases/latest | jq -r '.assets[] | if (.name | contains("amd64")) then .browser_download_url else empty end')
-./identity-to-kube-secret-amd64 -secret-name "storj-identity-node1" | kubectl apply -f -
+curl -L https://github.com/MqllR/storj-storagenode-chart/releases/download/identity/identity-to-kube-secret-amd64 -o identity-to-kube-secret
+./identity-to-kube-secret -secret-name "storj-identity-node1" | kubectl apply -f -
 ```
 
 3. Install the chart
 
 ```
-helm install node mqli/storj-storagenode --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,identity.externalSecret.secretName="storj-identity-node1"
+helm install node storj-storagenode-chart/storj-storagenode --set config.email=mymail@domain.com,config.wallet=0xdfca4035b9f16c40b558218d1bedc08590fe28d4,config.address=mydomain.net:28967,identity.externalSecret.secretName="storj-identity-node1"
 ```
