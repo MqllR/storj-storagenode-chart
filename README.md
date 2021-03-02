@@ -79,7 +79,7 @@ Parameter | Description | Default | Required
 `persistence.annotations` | Persistent volume claim annotation | `{}` | no
 `persistence.volumeClaimTemplate` | Persistent volume claim YAML | `{}` | no
 `metrics.enabled` | Start the container storj-exporter | `true` | no
-`metrics.image.repository` | Image name | `anclrii/storj-exporter:0.2.4` | no
+`metrics.image.repository` | Image name | `anclrii/storj-exporter:1.0.10` | no
 `metrics.image.pullPolicy` | Container pull policy | `IfNotPresent` | no
 `metrics.securtyContext` | Custom security context for container | `{}` | no
 `metrics.resources` | Resources request and limit YAML | `{}` | no
