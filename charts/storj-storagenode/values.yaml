@@ -60,13 +60,27 @@ metrics:
   resources: {}
 
 service:
-  annotations: {}
-    # prometheus.io/scrape: "true"
-    # prometheus.io/port: "9651"
-  type: NodePort
-  loadBalancerIP:
-  port: 28967
-  nodePort: ""
+  storagenode:
+    annotations: {}
+      # prometheus.io/scrape: "true"
+      # prometheus.io/port: "9651"
+    type: NodePort
+    loadBalancerIP:
+    port: 28967
+    nodePort: ""
+  stats:
+    enabled: true
+    type: ClusterIP
+    port: 14002
+    nodePort: ""
+  quic:
+    enabled: true
+    type: NodePort
+    loadBalancerIP:
+    port: 28967
+    protocol: UDP
+    nodePort: ""
+
 
 # Ingress is used to expose the dashboard
 ingress:
@@ -97,13 +111,6 @@ persistence:
     resources:
       requests:
         storage: 2Ti
-
-nodeStats:
-  enabled: true
-  service:
-    type: ClusterIP
-    port: 14002
-    nodePort: ""
 
 config:
   # wallet: "0xdfca4035b9f16c40b558218d1bedc08590fe28d4"
