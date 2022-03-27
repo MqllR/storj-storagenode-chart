@@ -47,6 +47,10 @@ spec:
             - mysweetmachine   # -> Set your node hostname
 ```
 
+#### Sysctl Configuration for UDP
+
+If you have `service.quic` enabled (the default), you will need to update the `net.core.rmem_max` sysctl value, or the storj storagenode will complain in the logs. Doing this on your worker node(s) will pass the setting through to the storj pod. Note that this may impact other pods as well, since it is being done at the node level. Please see https://docs.storj.io/node/dependencies/quic-requirements/linux-configuration-for-udp/ for full details and instructions.
+
 ### Configuration
 
 Parameter | Description | Default | Required
