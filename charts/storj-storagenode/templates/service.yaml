@@ -1,44 +1,39 @@
+{{- $fullName := include "storj-storagenode.fullname" . -}}
+{{- $labels := include "storj-storagenode.labels" . -}}
+{{- $selectorLabels := include "storj-storagenode.selectorLabels" . -}}
+{{- range $name, $service := .Values.service -}}
+  {{- if $service.enabled | default "true" -}}
+---  
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "storj-storagenode.fullname" . }}
+  name: {{ $fullName }}-{{ $name }}
   labels:
-    {{- include "storj-storagenode.labels" . | nindent 4 }}
+    {{- $labels | nindent 4 }}
   annotations:
-    {{- with .Values.service.annotations }}
-    {{- toYaml . | nindent 8 }}
+    {{- with $service.annotations }}
+    {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
-  {{- with .Values.service }}
+  {{- with $service }}
   type: {{ .type }}
   {{ if .loadBalancerIP }}loadBalancerIP: {{ .loadBalancerIP }}{{ end }}
   ports:
     - port: {{ .port }}
-      targetPort: storagenode
+      targetPort: {{ $name }}
+      {{- if .protocol }}
+      {{- if or ( eq .protocol "HTTP" ) ( eq .protocol "HTTPS" ) ( eq .protocol "TCP" ) }}
       protocol: TCP
-      name: storagenode
+      {{- else }}
+      protocol: {{ .protocol }}
+      {{- end }}
+      {{- else }}
+      protocol: TCP
+      {{- end }}
+      name: {{ $name }}
       {{ if .nodePort }}nodePort: {{ .nodePort }}{{ end }}
   {{- end }}
   selector:
-    {{- include "storj-storagenode.selectorLabels" . | nindent 4 }}
----
-{{- if .Values.nodeStats.enabled }}
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ include "storj-storagenode.fullname" . }}-stats
-  labels:
-    {{- include "storj-storagenode.labels" . | nindent 4 }}
-spec:
-  {{- with .Values.nodeStats.service }}
-  type: {{ .type }}
-  ports:
-    - port: {{ .port }}
-      targetPort: stats
-      protocol: TCP
-      name: stats
-      {{ if .nodePort }}nodePort: {{ .nodePort }}{{ end }}
+    {{- $selectorLabels | nindent 4 }}
   {{- end }}
-  selector:
-    {{- include "storj-storagenode.selectorLabels" . | nindent 4 }}
-{{- end }}
+{{ end }}

@@ -39,10 +39,15 @@ spec:
             - name: storagenode
               containerPort: 28967
               protocol: TCP
-            {{- if .Values.nodeStats.enabled }}
+            {{- if .Values.service.stats.enabled }}
             - name: stats
               containerPort:  14002
               protocol: TCP
+            {{- end }}
+            {{- if .Values.service.quic.enabled }}
+            - name: quic
+              containerPort: 28967
+              protocol: UDP
             {{- end }}
           livenessProbe:
             tcpSocket:

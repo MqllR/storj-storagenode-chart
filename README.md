@@ -47,6 +47,10 @@ spec:
             - mysweetmachine   # -> Set your node hostname
 ```
 
+#### Sysctl Configuration for UDP
+
+If you have `service.quic` enabled (the default), you will need to update the `net.core.rmem_max` sysctl value, or the storj storagenode will complain in the logs. Doing this on your worker node(s) will pass the setting through to the storj pod. Note that this may impact other pods as well, since it is being done at the node level. Please see https://docs.storj.io/node/dependencies/quic-requirements/linux-configuration-for-udp/ for full details and instructions.
+
 ### Configuration
 
 Parameter | Description | Default | Required
@@ -55,11 +59,19 @@ Parameter | Description | Default | Required
 `config.email` | Email address used by Storj  | `nil` | yes
 `config.address` | (domain\|ip):port for external communication | `nil` | yes
 `config.storage` | Storage size allocated  | `1TB` | no
-`service.type` | Service type for the storagenode | `NodePort` | no
-`service.annotations` | Service annotations | `{}` | no
-`service.loadBalancerIP` | Secify a Load balancer IP if the provider allow you | null | no
-`service.port` | Service port for the storagenode | `28967` | no
-`service.nodePort` | Node port to expose for the storagenode | "" | no
+`service.storagenode.type` | Service type for the storagenode | `NodePort` | no
+`service.storagenode.annotations` | Service annotations | `{}` | no
+`service.storagenode.loadBalancerIP` | Secify a Load balancer IP if the provider allow you | null | no
+`service.storagenode.port` | Service port for the storagenode | `28967` | no
+`service.storagenode.nodePort` | Node port to expose for the storagenode | "" | no
+`service.stats.enabled` | Expose the node's Dashboard | `true` | no
+`service.stats.type` | Service type for the dashboard | `ClusterIP` | no
+`service.stats.port` | Service port for the dashboard | `14002` | no
+`service.quic.enabled` | Expose the storagenode's UDP port for quic | `true` | no
+`service.quic.type` | Service type for the storagenode's UDP port | `NodePort` | no
+`service.quic.loadBalancerIP` | Secify a Load balancer IP if the provider allow you | null | no
+`service.quic.port` | Service port for the storagenode's UDP port | `28967` | no
+`service.quic.nodePort` | Node port to expose for the storagenode's UDP port | "" | no
 `replicaCount` | Number of replica | `1` | no
 `podAnnotations` | Annotations for the pod | `{}` | no
 `podSecurityContext` | Custom security context | `{}` | no
@@ -71,9 +83,6 @@ Parameter | Description | Default | Required
 `storagenode.image.pullPolicy` | Container pull policy | `Always` | no
 `storagenode.securtyContext` | Custom security context for container | `{}` | no
 `storagenode.resources` | Resources request and limit YAML | `{}` | no
-`nodeStats.enabled` | Expose the node's Dashboard | `true` | no
-`nodeStats.service.type` | Service type for the dashboard | `ClusterIP` | no
-`nodeStats.service.port` | Service port for the dashboard | `14002` | no
 `identity.externalSecret.secretName` | Specify the secretName | `""` | yes
 `persistence.enabled` | Create a persistence volume | `true` | no
 `persistence.annotations` | Persistent volume claim annotation | `{}` | no
