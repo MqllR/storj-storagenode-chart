@@ -92,7 +92,7 @@ Parameter | Description | Default | Required
 `metrics.image.pullPolicy` | Container pull policy | `IfNotPresent` | no
 `metrics.securtyContext` | Custom security context for container | `{}` | no
 `metrics.resources` | Resources request and limit YAML | `{}` | no
-`ingress.enabled` | If true, an ingress object will be created | `false` | no
+`ingress.enabled` | If true, an ingress object will be created to expose the __stat dashboard only__ | `false` | no
 `ingress.annotations` | Annotations for the ingress | `{}` | no
 `ingress.hosts` | Ingress hostname | `[]` | no
 `ingress.tls` | Ingress TLS | `[]` | no
@@ -107,7 +107,7 @@ helm repo add storj-storagenode-chart https://mqllr.github.io/storj-storagenode-
 
 2. Create your identity
 
-Create a secret with your identity in kubernetes
+Create a secret in kubernetes with your node identity
 
 ```
 curl -L https://github.com/MqllR/storj-storagenode-chart/releases/download/identity/identity-to-kube-secret-amd64 -o identity-to-kube-secret
