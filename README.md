@@ -92,7 +92,7 @@ Parameter | Description | Default | Required
 `metrics.image.pullPolicy` | Container pull policy | `IfNotPresent` | no
 `metrics.securtyContext` | Custom security context for container | `{}` | no
 `metrics.resources` | Resources request and limit YAML | `{}` | no
-`ingress.enabled` | If true, an ingress object will be created to expose the *stat dashboard only* | `false` | no
+`ingress.enabled` | If true, an ingress object will be created to expose the __stat dashboard only__ | `false` | no
 `ingress.annotations` | Annotations for the ingress | `{}` | no
 `ingress.hosts` | Ingress hostname | `[]` | no
 `ingress.tls` | Ingress TLS | `[]` | no
