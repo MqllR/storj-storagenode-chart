@@ -26,6 +26,7 @@ func kubernetesSecret(name string, data map[string][]byte) []byte {
 	secret := v1.Secret{
 		metav1.TypeMeta{Kind: "Secret", APIVersion: "v1"},
 		metav1.ObjectMeta{Name: name},
+		nil,
 		data,
 		map[string]string{},
 		v1.SecretType("Opaque"),
