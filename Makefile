@@ -4,14 +4,14 @@ BINARY=identity-to-kube-secret
 CHART_NAME=storj-storagenode
 CHART_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))/charts/$(CHART_NAME)
 
-.PHONY: go_build
-build: go_build-arm go_build-amd64
+.PHONY: build
+build: build-arm build-amd64
 
-.PHONY: go_build-arm
+.PHONY: build-arm
 build-arm:
 	GOARCH=arm ${GOBUILD} -o ${BINARY}-arm script/${BINARY}.go
 
-.PHONY: go_build-amd64
+.PHONY: build-amd64
 build-amd64:
 	GOARCH=amd64 ${GOBUILD} -o ${BINARY}-amd64 script/${BINARY}.go
 
